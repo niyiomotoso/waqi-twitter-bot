@@ -1,77 +1,65 @@
 #!/usr/bin/env bash
 counter=0
-my_array=("Fix security vulnerability in authentication"
+my_array=("Fix security vulnerability on installation"
                             "Update API documentation for version 2.0"
-                            "Merge pull request #456: Performance optimizations"
-                            "Add support for two-factor authentication"
+                            "Merge pull request #456:  optimizations"
+                            "Add support for authentication"
                             "Refactor code for better maintainability"
-                            "Implement new admin dashboard"
-                            "Release version 3.0.0"
+                            "Implement new graphs"
+                            "Release version 2.1.0"
                             "Update dependencies to latest versions"
                             "Resolve conflicts in feature branch"
-                            "Add comprehensive test coverage"
+                            "add single-city support"
                             "Improve error handling in API"
-                            "Optimize database queries for scalability"
+                            "Optimize mongodb queries"
                             "Standardize code formatting"
                             "Remove deprecated features"
-                            "Enhance user interface for mobile devices"
-                            "Fix compatibility issues with Internet Explorer"
-                            "Implement user feedback system"
-                            "Add support for password reset"
-                            "Optimize front-end performance"
-                            "Fix memory leak in backend service"
+                            "add emoji feature to single tweet composition"
+                            "Update dependencies to latest versions"
+                            "Implement some comment feedback"
+                            "add multi-color theme change on graph themes"
+                            "add multicity-samecountry support"
                             "Implement localization for multiple languages"
                             "Enhance API documentation"
-                            "Implement automated code deployment"
-                            "Integrate continuous integration pipeline"
-                            "Add user roles and permissions system"
-                            "Optimize search functionality with Elasticsearch"
-                            "Implement third-party login providers"
+                            "Implement automated code deployment, heroku"
+                            "identify countries by their woeId"
+                            "add logic to generate chart for cities in the same country"
+                            "Update dependencies to latest versions"
                             "Enhance error reporting and logging"
-                            "Implement single sign-on (SSO) authentication"
-"Fix issue with user authentication"
-                           "Add new feature: user profile page"
+                            "Fix issue with user authentication"
+                           "add start tweet function"
                            "Update documentation for API endpoints"
-                           "Merge pull request #123: Bug fixes"
-                           "Implement security enhancements"
+                           "Merge pull request #13: Bug fixes"
                            "Refactor code for better performance"
                            "Address code review comments"
                            "Release version 2.0.0"
                            "Update dependencies"
                            "Resolve merge conflict"
                            "Test suite improvements"
-                           "Add error handling to API"
+                           "add multicity-multicountry support"
                            "Optimize database queries"
                            "Code style formatting changes"
                            "Remove deprecated functions"
                            "Improve user interface"
-                           "Fix cross-browser compatibility issues"
                            "Enhance error logging in the backend"
-                           "Implement responsive design for mobile"
                            "Add unit tests for new features"
                            "Upgrade to the latest framework version"
                            "Update third-party libraries"
-                           "Create user onboarding tutorial"
-                           "Refactor database schema for scalability"
-                           "Fix broken links in documentation"
+                           "randomize the tweets based on trends"
+                           "Refactor schema for scalability"
                            "Add user feedback feature"
-                           "Implement password reset functionality"
-                           "Optimize front-end asset loading"
-                           "Fix memory leak in backend service"
+                           "Optimize asset loading"
+                           "Fix memory leak in service"
                            "Add localization support for multiple languages"
-                           "Enhance user authentication with two-factor authentication"
-                           "Integrate continuous integration and deployment (CI/CD) pipeline"
-                           "Implement user roles and permissions"
-                           "Improve search functionality with Elasticsearch"
-                           "Add support for third-party login providers"
+                           "Enhance dev link automation"
+                           "Add support for third-party providers"
                            "Enhance error reporting and logging"
-                           "Implement single sign-on (SSO) authentication"
-                           "Optimize database indexing for faster queries"
+                           "Optimize indexing for faster run"
                            "themes optimizations for base analyser"
-                           "include adaptive mode for ic launcher"
+                           "general start jobs for longer"
                            "dimension specification on wider assets"
-                           "update build file with latest android version"
-                           "handle midmap for larger device group")
+                           "update build file with latest version"
+                           "handle midmap for larger group")
 random_hour_element=1
 mn=$[ $RANDOM % 60 + 10 ]
 sc=$[ $RANDOM % 60 + 10 ]
@@ -80,16 +68,16 @@ sc=$[ $RANDOM % 60 + 10 ]
 array_length=${#my_array[@]}
 
 # Define an array of integers
-hour_array=(24 170 120 80 600 250 110 400 300)
+hour_array=(500 240 400 900 300)
 
 # Get the length of the array
 hour_array_length=${#hour_array[@]}
 
 
-while [ $counter -le 100 ]
+while [ $counter -le 10 ]
  do
       commit_counter=0
-      commit_count_array=(0 10 1 3 10 1 0 1 2 4)
+      commit_count_array=(0 2 5 3 0 1 0 1 2 4)
       commit_count_array_length=${#commit_count_array[@]}
       commit_count_index=$((RANDOM % commit_count_array_length))
       commit_count="${commit_count_array[commit_count_index]}"
@@ -101,8 +89,10 @@ while [ $counter -le 100 ]
           # Get the element at the random index
           random_element="${my_array[random_index]}"
 
-           dateUsed=$(gdate -d "2021-02-05 $random_hour_element hours $mn minutes $sc seconds" "+%a %b %d %H:%M:%S %Y %z")
-           echo $dateUsed > logger.md
+           dateUsed=$(gdate -d "2020-04-13 $random_hour_element hours $mn minutes $sc seconds" "+%a %b %d %H:%M:%S %Y %z")
+           b="messageHandler(error, false, success)"
+           c="${b} ${dateUsed}"
+           echo $c > controller.js
            git add .
            git commit -m "$random_element"
 
@@ -114,7 +104,7 @@ while [ $counter -le 100 ]
            commit_counter=$(($commit_counter + 1))
        done
 
-  git push origin main -f
+  git push origin master -f
 
   counter=$(($counter + 1))
 
