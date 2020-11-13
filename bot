@@ -68,7 +68,7 @@ sc=$[ $RANDOM % 60 + 10 ]
 array_length=${#my_array[@]}
 
 # Define an array of integers
-hour_array=(500 240 400 900 300)
+hour_array=(500 240 1400 1900 300)
 
 # Get the length of the array
 hour_array_length=${#hour_array[@]}
@@ -89,10 +89,10 @@ while [ $counter -le 10 ]
           # Get the element at the random index
           random_element="${my_array[random_index]}"
 
-           dateUsed=$(gdate -d "2020-04-13 $random_hour_element hours $mn minutes $sc seconds" "+%a %b %d %H:%M:%S %Y %z")
+           dateUsed=$(gdate -d "2020-11-13 $random_hour_element hours $mn minutes $sc seconds" "+%a %b %d %H:%M:%S %Y %z")
            b="messageHandler(error, false, success)"
            c="${b} ${dateUsed}"
-           echo $c > controller.js
+           echo $c > service.md
            git add .
            git commit -m "$random_element"
 
@@ -104,7 +104,7 @@ while [ $counter -le 10 ]
            commit_counter=$(($commit_counter + 1))
        done
 
-  git push origin master -f
+  git push origin main -f
 
   counter=$(($counter + 1))
 
