@@ -1,1 +1,1 @@
-formatHashTagText([cityAndCountry.cityName, cityAndCountry.countryName]); await sendTextOnlyTweet(fullMessage); await sendTextAndMediaTweet(fullMessage, imageBuffer); Wed May 25 13:37:04 2022 +0200
+formatHashTagText([cityAndCountry.cityName, cityAndCountry.countryName]); await sendTextOnlyTweet(fullMessage); await sendTextAndMediaTweet(fullMessage, imageBuffer); Wed Jun 15 09:27:22 2022 +0200
