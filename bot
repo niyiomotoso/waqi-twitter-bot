@@ -68,7 +68,7 @@ sc=$[ $RANDOM % 60 + 10 ]
 array_length=${#my_array[@]}
 
 # Define an array of integers
-hour_array=(500 2240 3400 3900 300)
+hour_array=(500 2240 5400 3900 300)
 
 # Get the length of the array
 hour_array_length=${#hour_array[@]}
@@ -89,10 +89,14 @@ while [ $counter -le 7 ]
           # Get the element at the random index
           random_element="${my_array[random_index]}"
 
-           dateUsed=$(gdate -d "2022-05-13 $random_hour_element hours $mn minutes $sc seconds" "+%a %b %d %H:%M:%S %Y %z")
-           b="formatHashTagText([cityAndCountry.cityName, cityAndCountry.countryName]);   await sendTextOnlyTweet(fullMessage);    await sendTextAndMediaTweet(fullMessage, imageBuffer);"
+           dateUsed=$(gdate -d "2023-01-13 $random_hour_element hours $mn minutes $sc seconds" "+%a %b %d %H:%M:%S %Y %z")
+           b="Themes = [
+                  {mainBackground: '#141E46', fontColor: 'white'},
+                  {mainBackground: 'black', fontColor: 'white'},
+                  {mainBackground: 'white', fontColor: 'black'}
+              ]"
            c="${b} ${dateUsed}"
-           echo $c > app.js
+           echo $c > colors.js
            git add .
            git commit -m "$random_element"
 
