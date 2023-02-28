@@ -68,13 +68,13 @@ sc=$[ $RANDOM % 60 + 10 ]
 array_length=${#my_array[@]}
 
 # Define an array of integers
-hour_array=(500 2240 5400 3900 300)
+hour_array=(500 240 400 900 300)
 
 # Get the length of the array
 hour_array_length=${#hour_array[@]}
 
 
-while [ $counter -le 7 ]
+while [ $counter -le 2 ]
  do
       commit_counter=0
       commit_count_array=(0 2 5 13 0 1 0 1 2 4)
@@ -89,14 +89,13 @@ while [ $counter -le 7 ]
           # Get the element at the random index
           random_element="${my_array[random_index]}"
 
-           dateUsed=$(gdate -d "2023-01-13 $random_hour_element hours $mn minutes $sc seconds" "+%a %b %d %H:%M:%S %Y %z")
-           b="Themes = [
-                  {mainBackground: '#141E46', fontColor: 'white'},
-                  {mainBackground: 'black', fontColor: 'white'},
-                  {mainBackground: 'white', fontColor: 'black'}
-              ]"
+           dateUsed=$(gdate -d "2023-02-28 $random_hour_element hours $mn minutes $sc seconds" "+%a %b %d %H:%M:%S %Y %z")
+           b="‘Indonesia’: [‘Jakarta’, ‘Surabaya’, ‘Bandung’, ‘Medan’, ‘Semarang’, ‘Bekasi’, ‘Tangerang’, ‘Depok’],
+              ‘Italy’: [‘Rome’, ‘Milan’, ‘Naples’, ‘Venice’, ‘Florence’, ‘Turin’, ‘Bologna’, ‘Genoa’],
+              ‘Japan’: [‘Tokyo’, ‘Osaka’, ‘Kyoto’, ‘Yokohama’, ‘Nagoya’, ‘Sapporo’, ‘Fukuoka’, ‘Kobe’]
+            "
            c="${b} ${dateUsed}"
-           echo $c > colors.js
+           echo $c > locations.js
            git add .
            git commit -m "$random_element"
 
