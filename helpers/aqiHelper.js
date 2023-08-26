@@ -7,7 +7,7 @@ import {
     UNHEALTHY_INDEX_MIN, VERY_UNHEALTHY_INDEX_MAX, VERY_UNHEALTHY_INDEX_MIN
 } from "../constants/aqiTable.js";
 
-export const getRemarkFromAqi = (aqIndex) => {
+export const getRemarkMapFromAqi = (aqIndex) => {
     if (aqIndex >= GOOD_INDEX_MIN && aqIndex <= GOOD_INDEX_MAX)
         return Table.GOOD;
     else if (aqIndex >= MODERATE_INDEX_MIN && aqIndex <= MODERATE_INDEX_MAX) {

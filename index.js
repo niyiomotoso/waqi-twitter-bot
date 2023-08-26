@@ -1,7 +1,8 @@
 import {createCanvas} from 'canvas';
 import {BarController, BarElement, CategoryScale, Chart, LinearScale, Title} from 'chart.js';
-import {getTwitterClient} from "./services/twitterApi.js";
+import {sendTextAndMediaTweet, uploadMedia} from "./services/twitterApi.js";
 import {getAirQualityByCity} from "./services/aqicnApi.js";
+import {SingleCityTweetMain} from "./workers/SingeCitytweet.js";
 
 // Register the necessary components
 Chart.register(CategoryScale, LinearScale, BarElement, Title, BarController);
@@ -27,7 +28,6 @@ async function createChartImage(city, airQuality) {
 
     // Render the chart to the canvas
     await chart.render();
-
     // Convert the canvas to a buffer
     return canvas.toBuffer('image/png');
 }
@@ -37,28 +37,19 @@ async function tweetAirQualityChart(city, airQuality) {
     const imageBuffer = await createChartImage(city, airQuality);
 
     const tweetText = `Air quality index for ${city}: ${airQuality}`;
-    const client = getTwitterClient();
     // Upload the chart image to Twitter
-    const mediaResponse = await client.v1.uploadMedia(imageBuffer, {
-        media_category: 'tweet_image',
-        mimeType: 'image/png'
-    });
-
-    console.log("mediaId", mediaResponse)
+    const mediaId = await uploadMedia(imageBuffer);
     // Tweet with the chart image
-    await client.v2.tweet(tweetText, { media: {media_ids: [mediaResponse] }});
-
-   // console.log('Tweeted:', tweetText);
+    await sendTextAndMediaTweet(tweetText, [mediaId]);
+    console.log("mediaId", mediaId)
 }
 
 async function main() {
-    const cities = ['New York']; // Add more cities as needed
-
+    const cities = ['London']; // Add more cities as needed
     for (const city of cities) {
         const airQuality = await getAirQualityByCity(city);
         await tweetAirQualityChart(city, airQuality.aqi);
     }
 }
 
-main();
-
+SingleCityTweetMain();
