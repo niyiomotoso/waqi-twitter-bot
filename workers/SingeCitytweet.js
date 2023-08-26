@@ -2,7 +2,7 @@ import { getAirQualityByCity } from "../services/aqicnApi.js";
 import {getRemarkMapFromAqi} from "../helpers/aqiHelper.js";
 import {sendTextOnlyTweet} from "../services/twitterApi.js";
 import cityJson from "../store/cities.json"  assert { type: "json" };
-import {getCountryArrayFromJson, getRandomNumberFromRange} from "../helpers/GeneralHelper.js";
+import {formatHashTagText, getCountryArrayFromJson, getRandomNumberFromRange} from "../helpers/GeneralHelper.js";
 import {isNumber} from "chart.js/helpers";
 
 export const SingleCityTweetMain = async () => {
@@ -29,8 +29,10 @@ export const SingleCityTweetMain = async () => {
     if (cityUrl) {
         source = `Source: ${cityUrl}`;
     }
+    const hashTags = formatHashTagText([cityAndCountry.cityName, cityAndCountry.countryName])
+    const fullMessage = aqiMessage + " \n\n" + level + " \n\n" + caution + "\n\n" + source+ "\n\n" + hashTags;
+    console.log(fullMessage);
 
-    const fullMessage = aqiMessage + " \n\n" + level + " \n\n" + caution + "\n\n" + source;
     await sendTextOnlyTweet(fullMessage);
 }
 
@@ -42,7 +44,6 @@ const getSingleCityAndCountryToTweet = () => {
     const cityIndexToUse = getRandomNumberFromRange(0, citiesInCountry.length - 1)
 
     const cityName = citiesInCountry[cityIndexToUse]
-    console.log(cityName, countryName)
     return {cityName, countryName}
 }
 
