@@ -19,6 +19,6 @@ export const formatHashTagText = (textArray = []) => {
         fullText += `#${textString.replace(" ", "")} `
     })
 
-    fullText += `#AirQuality #MyCity #News #Climate #WAQI`
+    fullText += `#AirQuality #News #Climate #Gogreen #SaveTheEarth #PublicHealth`
     return fullText;
 }
