@@ -16,7 +16,7 @@ export const getCountryArrayFromJson = () => {
 export const formatHashTagText = (textArray = []) => {
     let fullText = ""
     textArray.forEach( textString => {
-        fullText += `#${textString.replace(" ", "")} `
+        fullText += `#${textString.replace(/\s/g, '')} `
     })
 
     fullText += `#AirQuality #News #Climate #Gogreen #SaveTheEarth #PublicHealth`
