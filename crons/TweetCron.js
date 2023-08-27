@@ -1,7 +1,7 @@
 import cron from "node-cron"
 import { SingleCityTweetMain } from "../workers/SingeCitytweet.js";
 
-const runSingleCityTweet = cron.schedule('*/30 * * * *', async () => {
+const runSingleCityTweet = cron.schedule('*/20 * * * *', async () => {
     console.log("running runSingleCityTweet cron")
     await SingleCityTweetMain();
 });
