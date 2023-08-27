@@ -3,6 +3,7 @@ import {BarController, BarElement, CategoryScale, Chart, LinearScale, Title} fro
 import {sendTextAndMediaTweet, uploadMedia} from "./services/twitterApi.js";
 import {getAirQualityByCity} from "./services/aqicnApi.js";
 import {SingleCityTweetMain} from "./workers/SingeCitytweet.js";
+import {startTweetCron} from "./crons/TweetCron.js";
 
 // Register the necessary components
 Chart.register(CategoryScale, LinearScale, BarElement, Title, BarController);
@@ -51,5 +52,4 @@ async function main() {
         await tweetAirQualityChart(city, airQuality.aqi);
     }
 }
-
-SingleCityTweetMain();
+startTweetCron();

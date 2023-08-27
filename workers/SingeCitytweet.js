@@ -12,6 +12,7 @@ export const SingleCityTweetMain = async () => {
     // run this until we get a city that has data for us confirm an index was returned
     while (airQuality == null || !isNumber(aqIndex)) {
         cityAndCountry = getSingleCityAndCountryToTweet();
+        console.log("trying ", cityAndCountry)
         airQuality = await getAirQualityByCity(cityAndCountry.cityName);
         aqIndex = airQuality?.aqi;
     }
@@ -46,5 +47,3 @@ const getSingleCityAndCountryToTweet = () => {
     const cityName = citiesInCountry[cityIndexToUse]
     return {cityName, countryName}
 }
-
-getSingleCityAndCountryToTweet()
