@@ -2,7 +2,8 @@ import {createCanvas} from 'canvas';
 import {BarController, BarElement, CategoryScale, Chart, LinearScale, Title} from 'chart.js';
 import {sendTextAndMediaTweet, uploadMedia} from "./services/twitterApi.js";
 import {getAirQualityByCity} from "./services/aqicnApi.js";
-import {SingleCityTweetMain} from "./workers/SingeCitytweet.js";
+import dotenv from 'dotenv'
+dotenv.config()
 import {startTweetCron} from "./crons/TweetCron.js";
 
 // Register the necessary components
