@@ -3,6 +3,7 @@ import {BarController, BarElement, CategoryScale, Chart, LinearScale, Title} fro
 import {sendTextAndMediaTweet, uploadMedia} from "./services/twitterApi.js";
 import {getAirQualityByCity} from "./services/aqicnApi.js";
 import dotenv from 'dotenv'
+import http from 'http';
 dotenv.config()
 import {startTweetCron} from "./crons/TweetCron.js";
 
@@ -53,4 +54,8 @@ async function main() {
         await tweetAirQualityChart(city, airQuality.aqi);
     }
 }
-startTweetCron();
+
+
+http.createServer(function (request, response) {
+    startTweetCron();
+}).listen(process.env.PORT || 5000);
