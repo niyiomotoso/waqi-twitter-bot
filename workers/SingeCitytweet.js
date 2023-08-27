@@ -32,9 +32,8 @@ export const SingleCityTweetMain = async () => {
     }
     const hashTags = formatHashTagText([cityAndCountry.cityName, cityAndCountry.countryName])
     const fullMessage = aqiMessage + " \n\n" + level + " \n\n" + caution + "\n\n" + source+ "\n\n" + hashTags;
-    console.log(fullMessage);
-
     await sendTextOnlyTweet(fullMessage);
+    console.log(fullMessage);
 }
 
 const getSingleCityAndCountryToTweet = () => {
