@@ -66,5 +66,5 @@ mongoose.connection.on('connected', () => {
 });
 
 http.createServer(function (request, response) {
-
+    startTweetCron()
 }).listen(process.env.PORT || 5000);
