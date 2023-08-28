@@ -6,3 +6,5 @@ export const TWITTER_CRED = {
 }
 
 export const AQICN_TOKEN = 'f4523891710538bf622648db0952c2e7e660e770';
+
+export const MONGO_URL = "mongodb+srv://leap_user:Happy1234@beeddb.k52v6.mongodb.net/beeddb?retryWrites=true&w=majority"; //staging DB

@@ -54,3 +54,6 @@ export const VERY_UNHEALTHY_INDEX_MAX = 300;
 
 export const HAZARDOUS_INDEX_MIN = 300;
 export const HAZARDOUS_INDEX_MAX = 100000;
+
+export const CONDITION_ARRAY = [Table.GOOD.condition, Table.MODERATE.condition, Table.UNHEALTHY_FOR_SENSITIVE.condition,
+    Table.UNHEALTHY.condition, Table.VERY_UNHEALTHY.condition, Table.HAZARDOUS.condition]

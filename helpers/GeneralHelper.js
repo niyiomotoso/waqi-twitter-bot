@@ -13,6 +13,17 @@ export const getCountryArrayFromJson = () => {
     return countryArray;
 }
 
+export const getCitiesArrayFromDailyTweetsRecord = (dailyTweetRecord) => {
+    let citiesArray = [];
+    if (dailyTweetRecord) {
+        dailyTweetRecord.forEach(record => {
+            citiesArray.push(record.city)
+        })
+    }
+
+    return citiesArray;
+}
+
 export const formatHashTagText = (textArray = []) => {
     let fullText = ""
     textArray.forEach( textString => {
