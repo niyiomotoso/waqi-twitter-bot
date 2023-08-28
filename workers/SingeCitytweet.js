@@ -14,7 +14,7 @@ import {tweetType} from "../constants/tweetType.js";
 
 const allowSendBasedOnQuota = (condition) => {
     // pick a condition at random, return true only if it matches the one supplied in the parameter, the idea is to randomise our choice
-    return condition === getRandomConditionType();
+    return condition !== 'Good';
 }
 
 export const SingleCityTweetMain = async () => {
@@ -26,7 +26,7 @@ export const SingleCityTweetMain = async () => {
     // run this until we get a city that has data for us confirm an index was returned
     while ((airQuality == null || !isNumber(aqIndex)) || !allowSendBasedOnQuota(condition)) {
         // delay making requests again for 2 seconds
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 20));
         cityAndCountry = await getSingleCityAndCountryToTweet(tweetType.SINGLE_CITY_TWEET);
         airQuality = await getAirQualityByCity(cityAndCountry.cityName);
         if (airQuality != null) {
@@ -56,6 +56,7 @@ export const SingleCityTweetMain = async () => {
 
     const response = await sendTextOnlyTweet(fullMessage);
     console.log(fullMessage);
+
     if (response === true) {
         await createDailyTweet({city: cityAndCountry.cityName, country: cityAndCountry.countryName, condition: remark.condition, tweetType: tweetType.SINGLE_CITY_TWEET})
     }
