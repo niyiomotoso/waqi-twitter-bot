@@ -1,5 +1,5 @@
 import { getAirQualityByCity } from "../apis/aqicnApi.js";
-import {getRandomConditionType, getRemarkMapFromAqi} from "../helpers/aqiHelper.js";
+import {getRandomConditionType, getRandomConditionTypeBeta, getRemarkMapFromAqi} from "../helpers/aqiHelper.js";
 import { sendTextOnlyTweet } from "../apis/twitterApi.js";
 import cityJson from "../store/cities.json"  assert { type: "json" };
 import {
@@ -14,7 +14,7 @@ import {tweetType} from "../constants/tweetType.js";
 
 const allowSendBasedOnQuota = (condition) => {
     // pick a condition at random, return true only if it matches the one supplied in the parameter, the idea is to randomise our choice
-    return condition !== 'Good';
+    return condition === getRandomConditionTypeBeta(condition);
 }
 
 export const SingleCityTweetMain = async () => {
@@ -40,24 +40,24 @@ export const SingleCityTweetMain = async () => {
     }
 
     const cityUrl = airQuality?.city?.url
-    const aqiMessage = `Air quality index in ${cityAndCountry.cityName}, ${cityAndCountry.countryName} currently is ${aqIndex}.`;
+    const aqiMessage = `Air Quality Index in ${cityAndCountry.cityName} is ${aqIndex}.`;
     const level = `Condition: ${condition}.`
     let caution = "";
-    if (remark.caution) {
-        caution = `Caution: ${remark.caution}.`
+    if (remark.caution_short) {
+        caution = `Caution: ${remark.caution_short}.`
     }
 
     let source = "";
     if (cityUrl) {
-        source = `Source: ${cityUrl}`;
+        source = `${cityUrl}`;
     }
     const hashTags = formatHashTagText([cityAndCountry.cityName, cityAndCountry.countryName])
     const fullMessage = aqiMessage + " \n\n" + level + " \n\n" + caution + "\n\n" + source+ "\n\n" + hashTags;
-
-    const response = await sendTextOnlyTweet(fullMessage);
     console.log(fullMessage);
+    const response = await sendTextOnlyTweet(fullMessage);
 
     if (response === true) {
+        console.log("Tweet sent successfully")
         await createDailyTweet({city: cityAndCountry.cityName, country: cityAndCountry.countryName, condition: remark.condition, tweetType: tweetType.SINGLE_CITY_TWEET})
     }
 }

@@ -7,6 +7,7 @@ import {
     Table, UNHEALTHY_FOR_SENSITIVE_PEOPLE_INDEX_MAX, UNHEALTHY_FOR_SENSITIVE_PEOPLE_INDEX_MIN, UNHEALTHY_INDEX_MAX,
     UNHEALTHY_INDEX_MIN, VERY_UNHEALTHY_INDEX_MAX, VERY_UNHEALTHY_INDEX_MIN
 } from "../constants/aqiTable.js";
+import {getRandomNumberFromRange} from "./GeneralHelper.js";
 
 export const getRemarkMapFromAqi = (aqIndex) => {
     if (aqIndex >= GOOD_INDEX_MIN && aqIndex <= GOOD_INDEX_MAX)
@@ -48,6 +49,21 @@ export const getRandomConditionType = () => {
         cumulativeWeight += weights[i];
         if (randomValue <= cumulativeWeight) {
             return outcomes[i];
+        }
+    }
+}
+
+
+export const getRandomConditionTypeBeta = (condition) => {
+    // tweet every condition immediately, for Good, limit the chance 1 in 3 occurrences
+    if (condition !== Table.GOOD.condition) {
+        return condition;
+    } else {
+        const zeroOrOne = getRandomNumberFromRange(0, 2);
+        if (zeroOrOne === 1) {
+            return condition;
+        } else {
+            return 'FALSE_CONDITION' // i.e it will force a retry
         }
     }
 }
