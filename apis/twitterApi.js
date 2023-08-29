@@ -13,10 +13,15 @@ export const getTwitterClient= () => {
 }
 
 export const sendTextOnlyTweet = async (text) => {
-    const client = getTwitterClient();
-    // Upload the chart image to Twitter
-    await client.v2.tweet(text);
-    return true;
+    try {
+        const client = getTwitterClient();
+        // Upload the chart image to Twitter
+        await client.v2.tweet(text);
+        return true;
+    } catch (e) {
+        console.log(e)
+        throw e;
+    }
 }
 
 export const sendTextAndMediaTweet = async (text, mediaIds = []) => {
