@@ -9,12 +9,12 @@ const runSingleCityTweet = cron.schedule('*/15 * * * *', async () => {
     await SingleCityTweetMain();
 });
 
-const runMultiCitySameCountryTweet = cron.schedule('* */1 * * *', async () => {
+const runMultiCitySameCountryTweet = cron.schedule('0 */1 * * *', async () => {
     console.log("running runMultiCitySameCountryTweet cron")
     await MultiCitySameCountryMain();
 });
 
-const runMultiCityMultiCountryTweet = cron.schedule('* */2 * * *', async () => {
+const runMultiCityMultiCountryTweet = cron.schedule('0 */2 * * *', async () => {
     console.log("running runMultiCityMultiCountryTweet cron")
     await MultiCityMultiCountryMain();
 });
