@@ -27,7 +27,7 @@ export const SingleCityTweetMain = async () => {
     while ((airQuality == null || !isNumber(aqIndex)) || !allowSendBasedOnQuota(condition)) {
         // delay making requests again for 2 seconds
         await new Promise(resolve => setTimeout(resolve, 20));
-        cityAndCountry = await getSingleCityAndCountryToTweet(tweetType.SINGLE_CITY_TWEET);
+        cityAndCountry = await getSingleCityAndCountryToTweet();
         airQuality = await getAirQualityByCity(cityAndCountry.cityName);
         if (airQuality != null) {
             aqIndex = airQuality?.aqi;
@@ -62,11 +62,11 @@ export const SingleCityTweetMain = async () => {
     }
 }
 
-const getSingleCityAndCountryToTweet = async (tweetType) => {
+const getSingleCityAndCountryToTweet = async () => {
     // get a city and country that we have not sent any tweet to for the day
-    const dailyTweetRecord = await getDailyTweetByTweetType(tweetType)
-    const countryArray = getCountryArrayFromJson()
+    const dailyTweetRecord = await getDailyTweetByTweetType(tweetType.SINGLE_CITY_TWEET)
     const cityArray = getCitiesArrayFromDailyTweetsRecord(dailyTweetRecord)
+    const countryArray = getCountryArrayFromJson()
     let cityName = "";
     let countryName = "";
 

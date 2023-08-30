@@ -6,11 +6,13 @@ import {
 import {sendTextAndMediaTweet} from "../apis/twitterApi.js";
 import cityJson from "../store/cities.json"  assert { type: "json" };
 import {
-    formatHashTagText,
+    formatHashTagText, getCitiesArrayFromDailyTweetsRecord, getCountriesArrayFromDailyTweetsRecord,
     getCountryArrayFromJson,
     getRandomNumberFromRange, sizeMessageToTwitterLimit
 } from "../helpers/GeneralHelper.js";
 import {generateBarChart} from "../canvas/ImageGenerator.js";
+import {createDailyTweet, getDailyTweetByTweetType} from "../services/DailyTweetService.js";
+import {tweetType} from "../constants/tweetType.js";
 
 
 export const MultiCitySameCountryMain = async () => {
@@ -22,7 +24,7 @@ export const MultiCitySameCountryMain = async () => {
 
     // run this until we get a city that has data for us confirm an index was returned
     while (citiesArray.length < 2) {
-        const result =  getCitiesFromSingleCountry()
+        const result =  await getCitiesFromSingleCountry()
         possibleCitiesToFetch = result.cityArray
         countryName = result.countryName
         for (const possibleCity of possibleCitiesToFetch) {
@@ -61,20 +63,24 @@ export const MultiCitySameCountryMain = async () => {
     const response = await sendTextAndMediaTweet(sizeMessageToTwitterLimit(fullMessage), imageBuffer);
 
     if (response === true) {
+        await createDailyTweet({city: "", country: countryName, condition: "", tweetType: tweetType.MULTI_CITY_SAME_COUNTRY})
         console.log("Tweet sent successfully")
     }
 }
 
-const getCitiesFromSingleCountry =  () => {
+const getCitiesFromSingleCountry =  async () => {
     // get cities from a country with multiple cities
+    const dailyTweetRecord = await getDailyTweetByTweetType(tweetType.MULTI_CITY_SAME_COUNTRY)
+    const alreadyTweetedCountries = getCountriesArrayFromDailyTweetsRecord(dailyTweetRecord)
     let cityArray = [];
     let countryName = "";
     while (cityArray.length < 2) {
         const countryArray = getCountryArrayFromJson();
         const countryIndexToUse = getRandomNumberFromRange(0, countryArray.length - 1)
         countryName = countryArray[countryIndexToUse];
-
-        cityArray = cityJson[countryName]
+        if (!alreadyTweetedCountries.includes(countryName)) {
+            cityArray = cityJson[countryName];
+        }
     }
 
     return {cityArray, countryName};

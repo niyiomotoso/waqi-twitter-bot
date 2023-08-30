@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 let DailyTweetSchema = new Schema({
     city: {
         type: String,
-        required: true,
+        required: false,
     },
     country: {
         type: String,
@@ -12,7 +12,7 @@ let DailyTweetSchema = new Schema({
     },
     condition: {
         type: String,
-        required: true,
+        required: false,
     },
     tweetType: {
         type: String,

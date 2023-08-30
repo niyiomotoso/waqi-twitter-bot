@@ -33,6 +33,19 @@ export const getCitiesArrayFromDailyTweetsRecord = (dailyTweetRecord) => {
     return citiesArray;
 }
 
+export const getCountriesArrayFromDailyTweetsRecord = (dailyTweetRecord) => {
+    let countryArray = [];
+    if (dailyTweetRecord) {
+        dailyTweetRecord.forEach(record => {
+            if (!countryArray.includes(record.country)) {
+                countryArray.push(record.country)
+            }
+        })
+    }
+
+    return countryArray;
+}
+
 export const formatHashTagText = (textArray = []) => {
     let fullText = ""
     textArray.forEach( textString => {
