@@ -25,20 +25,30 @@ export const sendTextOnlyTweet = async (text) => {
 }
 
 export const sendTextAndMediaTweet = async (text, imageBuffer) => {
-    const client = getTwitterClient();
-    const mediaId =  await uploadMedia (imageBuffer)
-    console.log("mediaId", mediaId)
-    // Upload the chart image to Twitter
-    await client.v2.tweet(text, {media: {media_ids: [mediaId]}});
-    return true;
+    try {
+        const client = getTwitterClient();
+        const mediaId =  await uploadMedia (imageBuffer)
+        console.log("mediaId", mediaId)
+        // Upload the chart image to Twitter
+        await client.v2.tweet(text, {media: {media_ids: [mediaId]}});
+        return true;
+    } catch (e) {
+        console.log(e)
+        throw e;
+    }
 }
 
 // uploads the media and returns the mediaId
 export const uploadMedia = async (imageBuffer) => {
-    const client = getTwitterClient();
-    // Upload the chart image to Twitter
-    return await client.v1.uploadMedia(imageBuffer, {
-        media_category: 'tweet_image',
-        mimeType: 'image/png'
-    });
+    try {
+        const client = getTwitterClient();
+        // Upload the chart image to Twitter
+        return await client.v1.uploadMedia(imageBuffer, {
+            media_category: 'tweet_image',
+            mimeType: 'image/png'
+        });
+    } catch (e) {
+        console.log(e)
+        throw e;
+    }
 }
