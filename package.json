@@ -18,12 +18,12 @@
     "canvas": "^2.11.2",
     "chart.js": "^4.4.0",
     "dotenv": "^16.3.1",
+    "mongoose": "^5.12.14",
+    "mongoose-unique-validator": "^2.0.3",
     "node-cron": "^3.0.2",
     "node-fetch": "^3.3.2",
     "puppeteer": "^21.1.0",
     "twit": "^2.2.11",
-    "mongoose": "^5.12.14",
-    "mongoose-unique-validator": "^2.0.3",
     "twitter-api-v2": "^1.15.1",
     "twitter-v2": "^1.1.0"
   }

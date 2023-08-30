@@ -13,6 +13,15 @@ export const getCountryArrayFromJson = () => {
     return countryArray;
 }
 
+export const getCitiesArrayFromJson = () => {
+    let countryArray = [];
+    for (const country in cityJson) {
+        countryArray.push(country)
+    }
+
+    return countryArray;
+}
+
 export const getCitiesArrayFromDailyTweetsRecord = (dailyTweetRecord) => {
     let citiesArray = [];
     if (dailyTweetRecord) {

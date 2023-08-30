@@ -1,6 +1,7 @@
 // Function to get air quality data
 import fetch from "node-fetch";
 import { AQICN_TOKEN } from "../constants/config.js";
+import {getRandomNumberFromRange} from "../helpers/GeneralHelper.js";
 
 export const getAirQualityByCity = async (city) => {
     try {
@@ -17,5 +18,11 @@ export const getAirQualityByCity = async (city) => {
     } catch (e) {
         console.log(e);
         return null;
+    }
+}
+
+export const getAirQualityByCityMock = async (city) => {
+    return {
+        'aqi': getRandomNumberFromRange(0, 300),
     }
 }

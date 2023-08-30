@@ -27,7 +27,7 @@ export const sendTextOnlyTweet = async (text) => {
 export const sendTextAndMediaTweet = async (text, mediaIds = []) => {
     const client = getTwitterClient();
     // Upload the chart image to Twitter
-    await client.v2.tweet(text, {media: {media_ids: mediaIds}});
+    // await client.v2.tweet(text, {media: {media_ids: mediaIds}});
     return true;
 }
 
