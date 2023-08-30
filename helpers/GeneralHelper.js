@@ -42,3 +42,7 @@ export const formatHashTagText = (textArray = []) => {
     fullText += `#AirQuality #News #Climate #Gogreen #SaveTheEarth #PublicHealth`
     return fullText;
 }
+
+export const sizeMessageToTwitterLimit = (textMessage) => {
+    return textMessage.substring(0, 270);
+}

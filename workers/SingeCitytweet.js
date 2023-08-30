@@ -6,7 +6,7 @@ import {
     formatHashTagText,
     getCitiesArrayFromDailyTweetsRecord,
     getCountryArrayFromJson,
-    getRandomNumberFromRange
+    getRandomNumberFromRange, sizeMessageToTwitterLimit
 } from "../helpers/GeneralHelper.js";
 import {isNumber} from "chart.js/helpers";
 import { createDailyTweet, getDailyTweetByTweetType } from "../services/DailyTweetService.js";
@@ -54,7 +54,7 @@ export const SingleCityTweetMain = async () => {
     const hashTags = formatHashTagText([cityAndCountry.cityName, cityAndCountry.countryName])
     const fullMessage = aqiMessage + " \n\n" + level + " \n\n" + caution + "\n\n" + source+ "\n\n" + hashTags;
     console.log(fullMessage);
-    const response = await sendTextOnlyTweet(fullMessage);
+    const response = await sendTextOnlyTweet(sizeMessageToTwitterLimit(fullMessage));
 
     if (response === true) {
         console.log("Tweet sent successfully")

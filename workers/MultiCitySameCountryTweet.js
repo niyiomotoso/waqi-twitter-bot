@@ -1,27 +1,17 @@
 import {getAirQualityByCity, getAirQualityByCityMock} from "../apis/aqicnApi.js";
 import {
     arrayContainsNonGoodAQIs,
-    getRandomConditionType,
-    getRandomConditionTypeBeta,
-    getRemarkMapFromAqi
+    getRandomConditionTypeBeta
 } from "../helpers/aqiHelper.js";
-import {sendTextAndMediaTweet, sendTextOnlyTweet} from "../apis/twitterApi.js";
+import {sendTextAndMediaTweet} from "../apis/twitterApi.js";
 import cityJson from "../store/cities.json"  assert { type: "json" };
 import {
     formatHashTagText,
-    getCitiesArrayFromDailyTweetsRecord,
     getCountryArrayFromJson,
-    getRandomNumberFromRange
+    getRandomNumberFromRange, sizeMessageToTwitterLimit
 } from "../helpers/GeneralHelper.js";
-import {isNumber} from "chart.js/helpers";
-import { createDailyTweet, getDailyTweetByTweetType } from "../services/DailyTweetService.js";
-import {tweetType} from "../constants/tweetType.js";
 import {generateBarChart} from "../canvas/ImageGenerator.js";
 
-const allowSendBasedOnQuota = (condition) => {
-    // pick a condition at random, return true only if it matches the one supplied in the parameter, the idea is to randomise our choice
-    return condition === getRandomConditionTypeBeta(condition);
-}
 
 export const MultiCitySameCountryMain = async () => {
     let citiesArray = [];
@@ -31,13 +21,13 @@ export const MultiCitySameCountryMain = async () => {
 
 
     // run this until we get a city that has data for us confirm an index was returned
-    while (citiesArray < 2) {
+    while (citiesArray.length < 2) {
         const result =  getCitiesFromSingleCountry()
         possibleCitiesToFetch = result.cityArray
         countryName = result.countryName
         for (const possibleCity of possibleCitiesToFetch) {
             await new Promise(resolve => setTimeout(resolve, 20));
-            const airQuality = await getAirQualityByCityMock(possibleCity);
+            const airQuality = await getAirQualityByCity(possibleCity);
             let aqIndex = null;
             if (airQuality != null) {
                 aqIndex = airQuality?.aqi
@@ -55,11 +45,11 @@ export const MultiCitySameCountryMain = async () => {
     const chartTitle = `Air Quality Index of cities in ${countryName}`;
     const imageBuffer = await generateBarChart(citiesArray, aqiArray, chartTitle)
 
-    const aqiMessage = `Here is the latest Air Quality Index of cities in ${countryName}.`;
+    const aqiMessage = `Latest Air Quality Index of cities in ${countryName}.`;
 
     let caution = ""
     if (arrayContainsNonGoodAQIs(aqiArray)) {
-        caution = `Caution: Residents in unhealthy and hazardous area should avoid outdoor activities.`
+        caution = `Caution: Residents in unhealthy and hazardous areas should avoid outdoor activities.`
     }
     let citiesAndCountry
     citiesAndCountry = citiesArray;
@@ -68,7 +58,7 @@ export const MultiCitySameCountryMain = async () => {
     const hashTags = formatHashTagText(citiesAndCountry)
     const fullMessage = aqiMessage  + " \n\n" + caution + "\n\n" + hashTags;
     console.log(fullMessage);
-    const response = await sendTextAndMediaTweet(fullMessage, [imageBuffer]);
+    const response = await sendTextAndMediaTweet(sizeMessageToTwitterLimit(fullMessage), imageBuffer);
 
     if (response === true) {
         console.log("Tweet sent successfully")
