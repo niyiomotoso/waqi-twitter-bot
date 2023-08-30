@@ -58,7 +58,7 @@ export const MultiCitySameCountryMain = async () => {
     const aqiMessage = `Here is the latest Air Quality Index of cities in ${countryName}.`;
 
     let caution = ""
-    if (arrayContainsNonGoodAQIs()) {
+    if (arrayContainsNonGoodAQIs(aqiArray)) {
         caution = `Caution: Residents in unhealthy and hazardous area should avoid outdoor activities.`
     }
     let citiesAndCountry

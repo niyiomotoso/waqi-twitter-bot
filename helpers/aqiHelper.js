@@ -32,13 +32,14 @@ export const getRemarkMapFromAqi = (aqIndex) => {
 }
 
 export const arrayContainsNonGoodAQIs = (aqiArray = []) => {
+    let isTrue = false;
     aqiArray.forEach(aqi => {
         if (aqi > GOOD_INDEX_MAX) {
-            return true;
+            isTrue = true;
         }
     })
 
-    return false;
+    return isTrue;
 }
 
 export const getRandomConditionType = () => {
