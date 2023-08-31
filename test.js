@@ -1,11 +1,15 @@
 import {MultiCitySameCountryMain} from "./workers/MultiCitySameCountryTweet.js";
 import {MultiCityMultiCountryMain} from "./workers/MultiCityMultiCountry.js";
 import mongoose from "mongoose";
-import {MONGO_URL} from "./constants/config.js";
+import dotenv from "dotenv";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+dotenv.config({ path: __dirname + '/.env' })
 
 
-
-mongoose.connect(MONGO_URL, {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
