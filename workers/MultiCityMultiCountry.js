@@ -1,8 +1,5 @@
 import {getAirQualityByCity, getAirQualityByCityMock} from "../apis/aqicnApi.js";
-import {
-    arrayContainsAtLeastOneUnhealthyIndex,
-    arrayContainsNonGoodAQIs, getRandomConditionTypeBeta
-} from "../helpers/aqiHelper.js";
+import { arrayContainsAtLeastOneUnhealthyIndex, arrayContainsNonGoodAQIs } from "../helpers/aqiHelper.js";
 import {sendTextAndMediaTweet} from "../apis/twitterApi.js";
 import cityJson from "../store/cities.json"  assert { type: "json" };
 import {
