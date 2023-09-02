@@ -1,12 +1,13 @@
 // Function to get air quality data
 import fetch from "node-fetch";
 import {getRandomNumberFromRange} from "../helpers/GeneralHelper.js";
+import {isNumber} from "chart.js/helpers";
 
 export const getAirQualityByCity = async (city) => {
     try {
         const response = await fetch(`https://api.waqi.info/feed/${city}/?token=${process.env.AQICN_TOKEN}`);
         const data = await response.json();
-        if (data && data.status && data.status === "ok") {
+        if (data && data.status && data.status === "ok" && isNumber(data.data?.aqi)) {
 
             return data.data;
         }
