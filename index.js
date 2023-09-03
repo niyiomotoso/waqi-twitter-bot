@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { startTweetCron } from "./crons/TweetCron.js";
+// import { startTweetCron } from "./crons/TweetCron.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 dotenv.config({ path: __dirname + '/.env' })
