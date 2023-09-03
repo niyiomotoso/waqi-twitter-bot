@@ -1,7 +1,6 @@
 import {getAirQualityByCity, getAirQualityByCityMock} from "../apis/aqicnApi.js";
 import {
-    arrayContainsNonGoodAQIs,
-    getRandomConditionTypeBeta
+    arrayContainsNonGoodAQIs
 } from "../helpers/aqiHelper.js";
 import {sendTextAndMediaTweet} from "../apis/twitterApi.js";
 import cityJson from "../store/cities.json"  assert { type: "json" };
@@ -24,6 +23,7 @@ export const MultiCitySameCountryMain = async () => {
 
     // run this until we get a city that has data for us confirm an index was returned
     while (citiesArray.length < 2) {
+        citiesArray = []
         const result =  await getCitiesFromSingleCountry()
         possibleCitiesToFetch = result.cityArray
         countryName = result.countryName
