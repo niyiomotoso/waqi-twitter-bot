@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import {SingleCityTweetMain} from "./workers/SingeCitytweet.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 dotenv.config({ path: __dirname + '/.env' })
@@ -21,7 +22,8 @@ mongoose.connection.on('connected', () => {
 
 async function main() {
     // MultiCityMultiCountryMain()
-    MultiCitySameCountryMain()
+    // MultiCitySameCountryMain()
+    SingleCityTweetMain()
 }
 
 main();
