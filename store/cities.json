@@ -1,6 +1,5 @@
 {
   "Algeria": ["Algiers"],
-  "Angola": ["Luanda", "Huambo"],
   "Argentina": ["Buenos Aires", "Córdoba"],
   "Australia": ["Sydney", "Melbourne"],
   "Austria": ["Vienna", "Salzburg"],
@@ -20,7 +19,6 @@
   "Greece": ["Athens", "Thessaloniki"],
   "India": ["Mumbai", "Delhi", "Bangalore", "Kolkata", "Hyderabad", "Pune", "Ahmedabad"],
   "Indonesia": ["Jakarta", "Surabaya", "Bandung", "Medan", "Semarang", "Bekasi", "Tangerang", "Depok"],
-  "Iran": ["Tehran", "Isfahan"],
   "Italy": ["Rome", "Milan", "Naples", "Venice", "Florence", "Turin", "Bologna", "Genoa"],
   "Japan": ["Tokyo", "Osaka", "Kyoto", "Yokohama", "Nagoya", "Sapporo", "Fukuoka", "Kobe"],
   "Kenya": ["Nairobi"],
@@ -39,7 +37,15 @@
   "Switzerland": ["Zurich", "Geneva", "Basel", "Bern", "Lausanne", "Lucerne", "St. Gallen", "Winterthur"],
   "Turkey": ["Istanbul", "Ankara", "Izmir", "Antalya", "Bursa", "Adana", "Gaziantep", "Konya"],
   "Ukraine": ["Kyiv", "Lviv", "Dnipro", "Donetsk", "Odessa", "Zaporizhzhia", "Kryvyi Rih"],
-  "United Kingdom": ["London", "Manchester", "Edinburgh", "Birmingham", "Glasgow", "Liverpool", "Bristol", "Leeds"],
-  "United States": ["New York City", "Los Angeles", "Chicago", "Houston", "Miami", "Washington, D.C.", "Boston", "San Francisco"],
+  "UK": ["London", "Manchester", "Edinburgh", "Birmingham", "Glasgow", "Liverpool", "Bristol", "Leeds"],
+  "US": [
+    "New York City", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville",
+    "San Francisco", "Columbus", "Indianapolis", "Fort Worth", "Charlotte", "Seattle", "Denver", "Washington, D.C.", "Boston", "El Paso", "Nashville", "Detroit",
+    "Memphis"
+  ],
+  "USA": ["Portland", "Oklahoma City", "Las Vegas", "Louisville", "Baltimore", "Milwaukee", "Albuquerque", "Tucson", "Fresno", "Sacramento", "Kansas City",
+    "Long Beach", "Mesa", "Atlanta", "Colorado Springs", "Virginia Beach", "Raleigh", "Omaha", "Miami", "Oakland", "Minneapolis", "Tulsa", "Wichita",
+    "New Orleans"
+  ],
   "Vietnam": ["Ho Chi Minh City", "Hanoi", "Da Nang", "Hai Phong", "Can Tho", "Bien Hoa", "Hue", "Nha Trang"]
 }

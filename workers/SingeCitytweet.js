@@ -1,5 +1,5 @@
 import { getAirQualityByCity } from "../apis/aqicnApi.js";
-import {getRandomConditionType, getRandomConditionTypeBeta, getRemarkMapFromAqi} from "../helpers/aqiHelper.js";
+import {getRandomConditionTypeBeta, getRemarkMapFromAqi} from "../helpers/aqiHelper.js";
 import { sendTextOnlyTweet } from "../apis/twitterApi.js";
 import cityJson from "../store/cities.json"  assert { type: "json" };
 import {
