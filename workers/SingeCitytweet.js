@@ -11,6 +11,7 @@ import {
 import {isNumber} from "chart.js/helpers";
 import { createDailyTweet, getDailyTweetByTweetType } from "../services/DailyTweetService.js";
 import {tweetType} from "../constants/tweetType.js";
+import {getTrendsByCountry} from "../apis/twitterTrendsApi.js";
 
 const allowSendBasedOnQuota = (condition) => {
     // pick a condition at random, return true only if it matches the one supplied in the parameter, the idea is to randomise our choice
@@ -52,14 +53,20 @@ export const SingleCityTweetMain = async () => {
         source = `${cityUrl}`;
     }
     const hashTags = formatHashTagText([cityAndCountry.cityName, cityAndCountry.countryName])
-    const fullMessage = aqiMessage + " \n\n" + level + " \n\n" + caution + "\n\n" + source+ "\n\n" + hashTags;
+    const countryTrends = await getTrendsByCountry(cityAndCountry.countryName, 10);
+    let fullMessage = aqiMessage + "\n\n" + level + "\n\n" + caution + "\n\n" + source+ "\n\n" + hashTags;
+    if (countryTrends !== "") {
+        fullMessage += "\n"+countryTrends
+    }
+    fullMessage = sizeMessageToTwitterLimit(fullMessage)
+
     console.log(fullMessage);
-    const response = await sendTextOnlyTweet(sizeMessageToTwitterLimit(fullMessage));
+    const response = await sendTextOnlyTweet(fullMessage);
 
     if (response === true) {
         console.log("Tweet sent successfully")
         await createDailyTweet({city: cityAndCountry.cityName, country: cityAndCountry.countryName, condition: remark.condition, tweetType: tweetType.SINGLE_CITY_TWEET})
-    }
+   }
 }
 
 const getSingleCityAndCountryToTweet = async () => {

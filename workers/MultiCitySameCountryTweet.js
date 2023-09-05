@@ -12,6 +12,7 @@ import {
 import {generateBarChart} from "../canvas/ImageGenerator.js";
 import {createDailyTweet, getDailyTweetByTweetType} from "../services/DailyTweetService.js";
 import {tweetType} from "../constants/tweetType.js";
+import {getTrendsByCountry} from "../apis/twitterTrendsApi.js";
 
 
 export const MultiCitySameCountryMain = async () => {
@@ -58,9 +59,15 @@ export const MultiCitySameCountryMain = async () => {
     citiesAndCountry.push(countryName)
 
     const hashTags = formatHashTagText(citiesAndCountry)
-    const fullMessage = aqiMessage  + " \n\n" + caution + "\n\n" + hashTags;
+    let fullMessage = aqiMessage  + "\n\n" + caution + "\n\n" + hashTags;
+    const countryTrends = await getTrendsByCountry(countryName, 10);
+    if (countryTrends !== "") {
+        fullMessage += "\n"+countryTrends
+    }
+
+    fullMessage = sizeMessageToTwitterLimit(fullMessage)
     console.log(fullMessage);
-    const response = await sendTextAndMediaTweet(sizeMessageToTwitterLimit(fullMessage), imageBuffer);
+    const response = await sendTextAndMediaTweet(fullMessage, imageBuffer);
 
     if (response === true) {
         await createDailyTweet({city: "", country: countryName, condition: "", tweetType: tweetType.MULTI_CITY_SAME_COUNTRY})

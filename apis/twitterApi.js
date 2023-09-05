@@ -24,6 +24,18 @@ export const sendTextOnlyTweet = async (text) => {
     }
 }
 
+export const getTrendsByLocation = async () => {
+    // Trends of New York
+    const client = getTwitterClient();
+    const trendsOfNy = await client.v1.trendsAvailable();
+
+    for (const { trends, created_at } of trendsOfNy) {
+        for (const trend of trends) {
+            console.log('Trend', trend.name, 'created at', created_at);
+        }
+    }
+}
+
 export const sendTextAndMediaTweet = async (text, imageBuffer) => {
     try {
         const client = getTwitterClient();

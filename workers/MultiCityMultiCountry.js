@@ -8,6 +8,7 @@ import {
     getRandomNumberFromRange, sizeMessageToTwitterLimit
 } from "../helpers/GeneralHelper.js";
 import {generateBarChart} from "../canvas/ImageGenerator.js";
+import {getTrendsByCountry} from "../apis/twitterTrendsApi.js";
 
 
 export const MultiCityMultiCountryMain = async () => {
@@ -53,10 +54,15 @@ export const MultiCityMultiCountryMain = async () => {
     }
 
     const hashTags = formatHashTagText([])
-    const fullMessage = aqiMessage  + " \n\n" + caution + "\n\n" + hashTags;
-    console.log(fullMessage);
-    const response = await sendTextAndMediaTweet(sizeMessageToTwitterLimit(fullMessage), imageBuffer);
+    let fullMessage = aqiMessage  + "\n\n" + caution + "\n\n" + hashTags;
+    const countryTrends = await getTrendsByCountry("Worldwide", 10);
+    if (countryTrends !== "") {
+        fullMessage += "\n"+countryTrends
+    }
 
+    fullMessage = sizeMessageToTwitterLimit(fullMessage)
+    console.log(fullMessage);
+    const response = await sendTextAndMediaTweet(fullMessage, imageBuffer);
     if (response === true) {
         console.log("Tweet sent successfully")
     }
