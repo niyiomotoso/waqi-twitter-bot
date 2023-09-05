@@ -53,7 +53,7 @@ export const formatHashTagText = (textArray = []) => {
     })
 
     // fullText += `#AirQuality #News #Climate #Gogreen #SaveTheEarth #PublicHealth`
-    fullText += `#AirQuality #News #PublicHealth`
+    fullText += `#AirQuality#News#PublicHealth`
     return fullText;
 }
 
