@@ -34,6 +34,7 @@ const runDeleteDailyTweet = cron.schedule('0 0 * * *', async () => {
 
 export const startTweetCron = () => {
     runSingleCityTweet.start();
+    runSingleCityTweet2.start();
     runMultiCitySameCountryTweet.start();
     runMultiCityMultiCountryTweet.start();
     runDeleteDailyTweet.start();
