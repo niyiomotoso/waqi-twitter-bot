@@ -20,10 +20,10 @@ mongoose.connect(process.env.MONGO_URL, {
 })
 mongoose.connection.on('connected', () => {
     console.log("Database Connected");
+    main();
 });
 
 async function main() {
-    MultiCityMultiCountryMain()
+    SingleCityTweetMain()
 }
 
-main();
