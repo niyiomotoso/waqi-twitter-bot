@@ -4,20 +4,27 @@ import { deleteAllTweets } from "../services/DailyTweetService.js";
 import {MultiCitySameCountryMain} from "../workers/MultiCitySameCountryTweet.js";
 import {MultiCityMultiCountryMain} from "../workers/MultiCityMultiCountry.js";
 
-const runSingleCityTweet = cron.schedule('*/41 * * * *', async () => {
+const runSingleCityTweet = cron.schedule('0 */1 * * *', async () => {
     console.log("running runSingleCityTweet cron")
     await SingleCityTweetMain();
-});
+}); // 24 tweets
 
-const runMultiCitySameCountryTweet = cron.schedule('3 */3 * * *', async () => {
+
+const runSingleCityTweet2 = cron.schedule('30 */8 * * *', async () => {
+    console.log("running runSingleCityTweet cron")
+    await SingleCityTweetMain();
+}); // 3 tweets
+
+
+const runMultiCitySameCountryTweet = cron.schedule('3 */2 * * *', async () => {
     console.log("running runMultiCitySameCountryTweet cron")
     await MultiCitySameCountryMain();
-});
+}); // 12 tweets
 
 const runMultiCityMultiCountryTweet = cron.schedule('11 */5 * * *', async () => {
     console.log("running runMultiCityMultiCountryTweet cron")
     await MultiCityMultiCountryMain();
-});
+}); // 5 tweets
 
 
 const runDeleteDailyTweet = cron.schedule('0 0 * * *', async () => {
