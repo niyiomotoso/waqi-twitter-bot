@@ -26,6 +26,7 @@
     "puppeteer": "^21.1.0",
     "twit": "^2.2.11",
     "twitter-api-v2": "^1.15.1",
-    "twitter-v2": "^1.1.0"
+    "twitter-v2": "^1.1.0",
+    "waqi-js-client": "^1.2.0"
   }
 }

@@ -113,13 +113,3 @@ export const  generateBarChart = async (cities, aqi, chartTitle) => {
 
     return imageBuffer;
 }
-
-async function main() {
-    const cities = ['Hamburg', 'Berlin', 'Munich', 'Kiel', 'Stuttgart'];
-    const aqi = [23, 40, 45, 201, 100];
-
-    const barChartImage = await generateBarChart(cities, aqi, 'Air Quality Index of Cities');
-    // await tweetBarChart(barChartImage);
-}
-
-main();
