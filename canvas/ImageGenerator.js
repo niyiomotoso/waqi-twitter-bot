@@ -1,12 +1,15 @@
 import fs from 'fs';
 import {createCanvas} from 'canvas';
 import {BarController, BarElement, CategoryScale, Chart, Colors, Legend, LinearScale, Title} from 'chart.js';
+import {getRandomNumberFromRange} from "../helpers/GeneralHelper.js";
+import {Themes} from "../themes/Colors.js";
 
 // Register the necessary components
 Chart.register(CategoryScale, LinearScale, BarElement, Title, BarController, Colors, Legend);
 
 // Function to generate a bar chart image
 export const  generateBarChart = async (cities, aqi, chartTitle) => {
+    const colorTheme = Themes[getRandomNumberFromRange(0,2)];
     const canvas = createCanvas(800, 600);
     const ctx = canvas.getContext('2d');
 
@@ -16,7 +19,7 @@ export const  generateBarChart = async (cities, aqi, chartTitle) => {
             const ctx = chart.canvas.getContext('2d');
             ctx.save();
             ctx.globalCompositeOperation = 'destination-over';
-            ctx.fillStyle = '#141E46';
+            ctx.fillStyle = colorTheme.mainBackground;
             ctx.fillRect(0, 0, chart.width, chart.height);
             ctx.restore();
         }
@@ -51,7 +54,7 @@ export const  generateBarChart = async (cities, aqi, chartTitle) => {
                 title: {
                     display: true,
                     text: chartTitle,
-                    color: 'white', // Set title color
+                    color: colorTheme.fontColor, // Set title color
                     font: {
                         size: 24,
                     },
@@ -60,29 +63,29 @@ export const  generateBarChart = async (cities, aqi, chartTitle) => {
                     position: 'right',
                     display: true,
                     labels: {
-                        color: 'white',
+                        color: colorTheme.fontColor,
                         usePointStyle: true,
                         font: {
                             size: 16,
                         },
                         generateLabels: (chart) => {
                             return [
-                                {text: 'Good', fillStyle: 'green', 'fontColor': 'white'},
-                                {text: 'Moderate', fillStyle: 'yellow', 'fontColor': 'white'},
-                                {text: 'Unhealthy', fillStyle: 'orange', 'fontColor': 'white'},
-                                {text: 'Hazardous', fillStyle: 'red', 'fontColor': 'white'},
+                                {text: 'Good', fillStyle: 'green', 'fontColor': colorTheme.fontColor},
+                                {text: 'Moderate', fillStyle: 'yellow', 'fontColor': colorTheme.fontColor},
+                                {text: 'Unhealthy', fillStyle: 'orange', 'fontColor': colorTheme.fontColor},
+                                {text: 'Hazardous', fillStyle: 'red', 'fontColor': colorTheme.fontColor},
                             ];
                         },
                     },
                 },
                 datalabels: {
-                    color: 'white', // Set AQI value color
+                    color: colorTheme.fontColor, // Set AQI value color
                 },
             },
             scales: {
                 x: {
                     ticks: {
-                        color: 'white', // Set x-axis tick color
+                        color: colorTheme.fontColor, // Set x-axis tick color
                         font: {
                             size: 18,
                             weight: 'bold'
@@ -92,7 +95,7 @@ export const  generateBarChart = async (cities, aqi, chartTitle) => {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        color: 'white', // Set y-axis tick color
+                        color: colorTheme.fontColor, // Set y-axis tick color
                         font: {
                             size: 14,
                         },
