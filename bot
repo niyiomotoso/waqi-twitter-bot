@@ -74,7 +74,7 @@ hour_array=(500 240 400 900 300)
 hour_array_length=${#hour_array[@]}
 
 
-while [ $counter -le 2 ]
+while [ $counter -le 1 ]
  do
       commit_counter=0
       commit_count_array=(0 2 5 13 0 1 0 1 2 4)
@@ -89,13 +89,13 @@ while [ $counter -le 2 ]
           # Get the element at the random index
           random_element="${my_array[random_index]}"
 
-           dateUsed=$(gdate -d "2023-02-28 $random_hour_element hours $mn minutes $sc seconds" "+%a %b %d %H:%M:%S %Y %z")
-           b="‘Indonesia’: [‘Jakarta’, ‘Surabaya’, ‘Bandung’, ‘Medan’, ‘Semarang’, ‘Bekasi’, ‘Tangerang’, ‘Depok’],
-              ‘Italy’: [‘Rome’, ‘Milan’, ‘Naples’, ‘Venice’, ‘Florence’, ‘Turin’, ‘Bologna’, ‘Genoa’],
-              ‘Japan’: [‘Tokyo’, ‘Osaka’, ‘Kyoto’, ‘Yokohama’, ‘Nagoya’, ‘Sapporo’, ‘Fukuoka’, ‘Kobe’]
+           dateUsed=$(gdate -d "2023-09-16 $random_hour_element hours $mn minutes $sc seconds" "+%a %b %d %H:%M:%S %Y %z")
+           b="export const sizeMessageToTwitterLimit = (textMessage) => {
+                  return textMessage.substring(0, 270);
+              }
             "
-           c="${b} ${dateUsed}"
-           echo $c > locations.js
+           c="${b} ${random_index}"
+           echo $c > util.js
            git add .
            git commit -m "$random_element"
 
