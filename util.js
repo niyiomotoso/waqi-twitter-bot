@@ -1,1 +1,1 @@
-export const sizeMessageToTwitterLimit = (textMessage) => { return textMessage.substring(0, 270); } 23
+export const sizeMessageToTwitterLimit = (textMessage) => { return textMessage.substring(0, 270); } 5
