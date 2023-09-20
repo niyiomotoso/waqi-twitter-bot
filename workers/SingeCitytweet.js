@@ -44,7 +44,7 @@ export const SingleCityTweetMain = async () => {
     const cityUrl = airQuality?.city?.url
     const aqiMessage = `Air Quality Index in ${cityAndCountry.cityName} is ${aqIndex}.`;
     const emoji = EMOJI_STORE[condition]
-    const level = `Condition: ${condition} ${emoji}.`
+    const level = `Condition: ${condition} ${emoji}`
     let caution = "";
     if (remark.caution_short) {
         caution = `Caution: ${remark.caution_short}.`
