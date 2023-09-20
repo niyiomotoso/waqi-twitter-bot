@@ -20,5 +20,5 @@ mongoose.connection.on('connected', () => {
 });
 
 async function main() {
-    GenerateChartForCities()
+    SingleCityTweetMain()
 }

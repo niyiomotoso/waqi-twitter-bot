@@ -43,6 +43,15 @@ export const Table = {
     },
 }
 
+export const EMOJI_STORE = {
+    "GOOD": "☁️😊",
+    "MODERATE": "🌤🙂",
+    "UNHEALTHY_FOR_SENSITIVE": "🌦️😷",
+    "UNHEALTHY": "🌫😷",
+    "VERY_UNHEALTHY": "🌥️😰",
+    "HAZARDOUS": "🚫😰"
+}
+
 export const GOOD_INDEX_MIN = 0;
 export const GOOD_INDEX_MAX = 50;
 

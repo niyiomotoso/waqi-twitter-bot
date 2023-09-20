@@ -12,6 +12,7 @@ import {isNumber} from "chart.js/helpers";
 import { createDailyTweet, getDailyTweetByTweetType } from "../services/DailyTweetService.js";
 import {tweetType} from "../constants/tweetType.js";
 import {getTrendsByCountry} from "../apis/twitterTrendsApi.js";
+import {EMOJI_STORE} from "../constants/aqiTable.js";
 
 const allowSendBasedOnQuota = (condition) => {
     // pick a condition at random, return true only if it matches the one supplied in the parameter, the idea is to randomise our choice
@@ -42,7 +43,8 @@ export const SingleCityTweetMain = async () => {
 
     const cityUrl = airQuality?.city?.url
     const aqiMessage = `Air Quality Index in ${cityAndCountry.cityName} is ${aqIndex}.`;
-    const level = `Condition: ${condition}.`
+    const emoji = EMOJI_STORE[condition]
+    const level = `Condition: ${condition} ${emoji}.`
     let caution = "";
     if (remark.caution_short) {
         caution = `Caution: ${remark.caution_short}.`
