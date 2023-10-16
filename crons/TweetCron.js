@@ -10,10 +10,10 @@ const runSingleCityTweet = cron.schedule('0 */1 * * *', async () => {
 }); // 24 tweets
 
 
-const runSingleCityTweet2 = cron.schedule('30 */8 * * *', async () => {
+const runSingleCityTweet2 = cron.schedule('0 */12 * * *', async () => {
     console.log("running runSingleCityTweet cron")
     await SingleCityTweetMain();
-}); // 3 tweets
+}); // 2 tweets
 
 
 const runMultiCitySameCountryTweet = cron.schedule('3 */2 * * *', async () => {
